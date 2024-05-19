@@ -24,7 +24,7 @@ namespace warehouse_manager.Controllers
             var result = new List<WarehouseEntry>();
 
             foreach (var item in recordsList) {
-                result.Add(new WarehouseEntry() { ProductId = item.ProductId, Quantity = item.Quantity})
+                result.Add(new WarehouseEntry() { ProductId = item.ProductId, Quantity = item.Quantity });
             }
             return Ok(result);
         }
