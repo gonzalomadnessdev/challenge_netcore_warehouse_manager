@@ -11,7 +11,7 @@ using warehouse_manager.Repositories.Models;
 namespace warehouse_manager.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    [Migration("20240519135557_InitialCreate")]
+    [Migration("20240519235621_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,7 +24,7 @@ namespace warehouse_manager.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("warehouse_manager.Models.Capacity", b =>
+            modelBuilder.Entity("warehouse_manager.Repositories.Models.CapacityDBRecord", b =>
                 {
                     b.Property<int>("CapacityId")
                         .ValueGeneratedOnAdd()
@@ -32,10 +32,10 @@ namespace warehouse_manager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CapacityId"));
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("CapacityId");
@@ -45,7 +45,7 @@ namespace warehouse_manager.Migrations
                     b.ToTable("Capacity");
                 });
 
-            modelBuilder.Entity("warehouse_manager.Models.Product", b =>
+            modelBuilder.Entity("warehouse_manager.Repositories.Models.ProductDBRecord", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
@@ -61,9 +61,9 @@ namespace warehouse_manager.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("warehouse_manager.Models.Capacity", b =>
+            modelBuilder.Entity("warehouse_manager.Repositories.Models.CapacityDBRecord", b =>
                 {
-                    b.HasOne("warehouse_manager.Models.Product", "Product")
+                    b.HasOne("warehouse_manager.Repositories.Models.ProductDBRecord", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)

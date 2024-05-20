@@ -24,7 +24,7 @@ namespace warehouse_manager.Repositories
 
         public IEnumerable<ProductRecord> GetProductRecords()
         {
-            var list = _context.Product.ToList();
+            var list = _context.ProductRecord.ToList();
 
             foreach (var item in list)
             {
@@ -34,7 +34,12 @@ namespace warehouse_manager.Repositories
 
         public IEnumerable<ProductRecord> GetProductRecords(Func<ProductRecord, bool> filter)
         {
-            throw new NotImplementedException();
+            var list = _context.ProductRecord.Where((Func<ProductDBRecord, bool>)filter).ToList();
+
+            foreach (var item in list)
+            {
+                yield return (new ProductRecord() { ProductId = item.ProductId, Quantity = item.Quantity });
+            }
         }
 
         public void SetCapacityRecord(int productId, int capacity)
