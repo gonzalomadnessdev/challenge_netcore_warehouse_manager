@@ -14,12 +14,22 @@ namespace warehouse_manager.Repositories
 
         public IEnumerable<CapacityRecord> GetCapacityRecords()
         {
-            throw new NotImplementedException();
+            var list = _context.CapacityRecord.ToList();
+
+            foreach (var item in list)
+            {
+                yield return (new CapacityRecord() { ProductId = item.ProductId, Capacity = item.Capacity });
+            }
         }
 
         public IEnumerable<CapacityRecord> GetCapacityRecords(Func<CapacityRecord, bool> filter)
         {
-            throw new NotImplementedException();
+            var list = _context.CapacityRecord.Where((Func<CapacityDBRecord, bool>)filter).ToList();
+
+            foreach (var item in list)
+            {
+                yield return (new CapacityRecord() { ProductId = item.ProductId, Capacity = item.Capacity });
+            }
         }
 
         public IEnumerable<ProductRecord> GetProductRecords()
@@ -44,12 +54,16 @@ namespace warehouse_manager.Repositories
 
         public void SetCapacityRecord(int productId, int capacity)
         {
-            throw new NotImplementedException();
+            var capacityRecord = _context.CapacityRecord.Single(c => c.ProductId == productId);
+            capacityRecord.Capacity = capacity;
+            _context.SaveChanges();
         }
 
         public void SetProductRecord(int productId, int quantity)
         {
-            throw new NotImplementedException();
+            var productRecord = _context.ProductRecord.Single(p => p.ProductId == productId);
+            productRecord.Quantity = quantity;
+            _context.SaveChanges();
         }
     }
 }
