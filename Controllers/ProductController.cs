@@ -39,6 +39,11 @@ namespace warehouse_manager.Controllers
             IEnumerable<ProductRecord> products = _warehouseRepository.GetProductRecords(p => p.ProductId == productId);
             ProductRecord product = products.FirstOrDefault()!;
 
+            if (product == null)
+            {
+                throw new Exception("Cannot Set. There is no product for given product ID.");
+            }
+
             if (product != null && capacity < product.Quantity)
             {
                 return new BadRequestObjectResult(new QuantityTooLowMessage());
