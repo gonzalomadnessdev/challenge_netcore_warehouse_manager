@@ -1,6 +1,8 @@
-﻿namespace warehouse_manager.Domain.Entities
+﻿using warehouse_manager.Domain.Contracts;
+
+namespace warehouse_manager.Domain.Entities
 {
-    public class ProductRecord
+    public class ProductRecord : IProductRecord
     {
         public int ProductId { get; set; }
         public int Quantity { get; set; }

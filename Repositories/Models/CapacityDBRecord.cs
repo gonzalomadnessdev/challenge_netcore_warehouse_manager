@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using warehouse_manager.Domain.Contracts;
 
 namespace warehouse_manager.Repositories.Models
 {
     [Table("Capacity")]
-    public class CapacityDBRecord
+    public class CapacityDBRecord : ICapacityRecord
     {
         [Key]
         public int CapacityId { get; set; }

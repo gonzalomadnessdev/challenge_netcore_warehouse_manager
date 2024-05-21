@@ -1,4 +1,6 @@
-﻿using warehouse_manager.Application.Contracts;
+﻿using System.Linq;
+using warehouse_manager.Application.Contracts;
+using warehouse_manager.Domain.Contracts;
 using warehouse_manager.Domain.Entities;
 using warehouse_manager.Repositories.Models;
 
@@ -22,9 +24,9 @@ namespace warehouse_manager.Repositories
             }
         }
 
-        public IEnumerable<CapacityRecord> GetCapacityRecords(Func<CapacityRecord, bool> filter)
+        public IEnumerable<CapacityRecord> GetCapacityRecords(Func<ICapacityRecord, bool> filter)
         {
-            var list = _context.CapacityRecord.Where((Func<CapacityDBRecord, bool>)filter).ToList();
+            var list = _context.CapacityRecord.Where(filter).ToList();
 
             foreach (var item in list)
             {
@@ -42,9 +44,9 @@ namespace warehouse_manager.Repositories
             }
         }
 
-        public IEnumerable<ProductRecord> GetProductRecords(Func<ProductRecord, bool> filter)
+        public IEnumerable<ProductRecord> GetProductRecords(Func<IProductRecord, bool> filter)
         {
-            var list = _context.ProductRecord.Where((Func<ProductDBRecord, bool>)filter).ToList();
+            var list = _context.ProductRecord.Where(filter).ToList();
 
             foreach (var item in list)
             {
