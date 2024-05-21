@@ -2,6 +2,6 @@
 {
     public class QuantityTooHighMessage
     {
-        public string Message => "Too low a quantity was provided";
+        public string Message => "Too high a quantity was provided";
     }
 }
